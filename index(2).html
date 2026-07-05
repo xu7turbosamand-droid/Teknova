@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تکنوا | پلتفرم هوشمند تعاملی</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- هدر اصلی -->
+    <header>
+        <div class="header-container">
+            <div class="logo">تکنوا ⚡ <span id="adminBadge" class="admin-indicator" style="display: none;">پنل مدیریت</span></div>
+            <div class="header-left">
+                <span id="userBadge" class="user-badge">بازدیدکننده</span>
+                <button id="globalLogoutBtn" class="btn-logout" onclick="logoutSystem()" style="display: none; margin-right: 10px;">خروج از حساب 🚪</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="grid-layout">
+            
+            <!-- ستون راست و وسط (بخش داینامیک سیستم) -->
+            <div class="content-side">
+                
+                <!-- ۱. فرم ورود / ثبت‌نام جامع -->
+                <div id="pageAuth" class="auth-box">
+                    <div class="auth-tabs">
+                        <button id="tabLoginBtn" class="auth-tab-btn active" onclick="toggleAuthMode('login')">ورود</button>
+                        <button id="tabRegisterBtn" class="auth-tab-btn" onclick="toggleAuthMode('register')">ثبت‌نام</button>
+                    </div>
+
+                    <h3 id="authTitle" style="margin-top: 20px;">🔐 ورود به حساب کاربری</h3>
+                    
+                    <div class="auth-form-fields">
+                        <!-- فیلدهای مشترک و اختصاصی -->
+                        <div class="input-group id-reg-only" style="display: none;">
+                            <input type="text" id="authFirstName" placeholder="نام">
+                        </div>
+                        <div class="input-group id-reg-only" style="display: none;">
+                            <input type="text" id="authLastName" placeholder="نام خانوادگی">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="authUsername" placeholder="نام کاربری (برای ادمین: admin)">
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="authPassword" placeholder="رمز عبور">
+                        </div>
+                    </div>
+                    
+                    <button id="btnSubmitAuth" class="btn-primary" onclick="handleAuthSubmit()" style="width: 100%; margin-top: 15px; padding: 14px; font-size: 15px;">ورود به حساب 🚀</button>
+                </div>
+
+                <!-- ۲. منوی اصلی کاربران عادی (دو دکمه مربعی بزرگ) -->
+                <div id="pageMainMenu" style="display: none;">
+                    <h2>خدمات هوشمند تکنوا</h2>
+                    <p style="color: #7e8c9f; font-size: 13px; margin-bottom: 25px;">لطفاً یکی از سرویس‌های زیر را جهت ورود انتخاب کنید:</p>
+                    
+                    <div class="square-buttons-grid">
+                        <button class="square-btn" onclick="openService('messenger')">
+                            <span class="square-icon">💬</span>
+                            <span class="square-title">پیام‌رسان متنی</span>
+                            <span class="square-desc">گفتگوی متنی دوطرفه با دیگر کاربران پلتفرم</span>
+                        </button>
+                        
+                        <button class="square-btn" onclick="openService('anonymous')">
+                            <span class="square-icon">🕶️</span>
+                            <span class="square-title">پیام ناشناس</span>
+                            <span class="square-desc">ارسال و دریافت صندوقچه پیام‌های پنهان</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ۳. پنل مدیریت اختصاصی ادمین (اگر ادمین وارد شود این باز می‌شود) -->
+                <div id="pageAdminMenu" style="display: none;">
+                    <h2 style="color: #00f2fe;">🛠️ میز کار و مدیریت کل سیستم</h2>
+                    <p style="color: #7e8c9f; font-size: 13px; margin-bottom: 20px;">به پنل مدیریت پلتفرم خوش آمدید. کنترل کل دیتای متنی سیستم در این بخش قرار دارد.</p>
+                    
+                    <div class="admin-dashboard-grid">
+                        <div class="admin-card">
+                            <h4>👥 کاربران ثبت شده</h4>
+                            <div id="adminUserList" class="admin-log-box"><!-- لیست کاربران --></div>
+                        </div>
+                        <div class="admin-card">
+                            <h4>📜 کل آرشیو پیام‌های چت (P2P)</h4>
+                            <div id="adminGlobalChatLogs" class="admin-log-box"><!-- لیست چت‌ها --></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ۴. پنل سرویس پیام‌رسان متنی P2P -->
+                <div id="serviceMessenger" style="display: none;">
+                    <div class="service-header">
+                        <button class="btn-back" onclick="backToMainMenu()">⬅️ بازگشت به منو</button>
+                        <h3>💬 پیام‌رسان متنی اختصاصی</h3>
+                    </div>
+                    
+                    <div class="messenger-main-grid">
+                        <div class="chat-sidebar">
+                            <label style="font-size: 11px; color: #7e8c9f;">جستجوی مخاطب:</label>
+                            <input type="text" id="searchTargetUser" placeholder="نام کاربری (مثال: amir)">
+                            <button onclick="startChatWithUser()">شروع گفتگو 🔍</button>
+                            <div class="active-chat-target">
+                                چت با: <span id="chattingWithTarget" style="font-weight: bold; color: #00f2fe;">انتخاب نشده</span>
+                            </div>
+                        </div>
+
+                        <div class="chat-main-stream">
+                            <div id="miniChatStream" class="mini-chat-stream">
+                                <div class="anon-system-msg">نام کاربری فرد مورد نظر را در منوی سمت راست وارد کنید.</div>
+                            </div>
+                            <div class="mini-chat-input-area">
+                                <input type="text" id="miniChatInput" placeholder="متن پیام..." disabled>
+                                <button id="miniChatSendBtn" onclick="sendMiniChatMessage()" disabled>ارسال</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ۵. پنل سرویس پیام ناشناس -->
+                <div id="serviceAnonymous" style="display: none;">
+                    <div class="service-header">
+                        <button class="btn-back" onclick="backToMainMenu()">⬅️ بازگشت به منو</button>
+                        <h3>🕶️ سیستم پیام ناشناس تکنوا</h3>
+                    </div>
+                    <div class="auth-box" style="background: rgba(0,0,0,0.1); margin-top: 15px;">
+                        <p>این بخش مربوط به ارسال پیام ناشناس و صندوقچه پنهان شماست.</p>
+                        <div class="anon-system-msg" style="display: inline-block;">تنظیمات این بخش با موفقیت به پایان رسیده است.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ستون چپ ثابت: هوش مصنوعی روزمره -->
+            <div class="chat-side">
+                <h3 style="margin-top: 0; font-size: 16px;">دستیار هوشمند روزمره 🤖</h3>
+                <div id="chatMessages" class="chat-box">
+                    <div class="msg bot-msg">سلام! من دستیار هوشمند تو هستم. چطور می‌توانم کمکت کنم؟</div>
+                </div>
+                <div class="chat-input-wrapper">
+                    <input type="text" id="chatInput" placeholder="چیزی بپرسید...">
+                    <button onclick="sendMessage()">ارسال</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

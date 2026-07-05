@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
+
+:root {
+    --bg-color: #0a1128;
+    --panel-bg: #111a2e;
+    --primary: #00f2fe;
+    --text-color: #ffffff;
+    --border-color: #233554;
+    --btn-danger: #ff4757;
+}
+
+* { 
+    box-sizing: border-box; 
+    font-family: 'Vazirmatn', sans-serif !important; 
+}
+
+body { 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    margin: 0; 
+    padding: 0; 
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+/* هدر اصلی */
+header { 
+    background-color: var(--panel-bg); 
+    border-bottom: 1px solid var(--border-color); 
+    padding: 15px 20px; 
+}
+
+.header-container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.logo { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: var(--primary); 
+}
+
+.admin-indicator { 
+    font-size: 12px; 
+    background: var(--btn-danger); 
+    color: #fff; 
+    padding: 2px 8px; 
+    border-radius: 4px; 
+    margin-right: 10px; 
+    vertical-align: middle;
+}
+
+.user-badge { 
+    background: rgba(0, 242, 254, 0.1); 
+    border: 1px solid var(--primary); 
+    padding: 5px 12px; 
+    border-radius: 20px; 
+    font-size: 13px; 
+}
+
+/* ساختار گرید دو ستونه */
+.grid-layout { 
+    display: grid; 
+    grid-template-columns: 2fr 1.1fr; 
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
+@media (max-width: 850px) { 
+    .grid-layout { grid-template-columns: 1fr; } 
+}
+
+.content-side, .chat-side { 
+    background-color: var(--panel-bg); 
+    border: 1px solid var(--border-color); 
+    padding: 25px; 
+    border-radius: 12px; 
+    min-height: 520px; 
+}
+
+/* بخش احراز هویت (ورود / ثبت نام) */
+.auth-tabs { 
+    display: flex; 
+    border-bottom: 2px solid var(--border-color); 
+    margin-bottom: 15px; 
+}
+
+.auth-tab-btn { 
+    flex: 1; 
+    background: transparent; 
+    border: none; 
+    color: #7e8c9f; 
+    padding: 12px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 15px; 
+}
+
+.auth-tab-btn.active { 
+    color: var(--primary); 
+    border-bottom: 2px solid var(--primary); 
+}
+
+.auth-form-fields { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+
+.auth-box { 
+    background: rgba(0,0,0,0.2); 
+    border: 1px solid var(--border-color); 
+    padding: 30px; 
+    border-radius: 12px; 
+    max-width: 480px; 
+    margin: 20px auto; 
+}
+
+.auth-box input { 
+    width: 100%; 
+    padding: 12px; 
+    background: var(--panel-bg); 
+    border: 1px solid var(--border-color); 
+    color: #fff; 
+    border-radius: 8px; 
+    text-align: center; 
+    outline: none; 
+}
+
+.btn-primary { 
+    background: var(--primary); 
+    color: #000; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+
+.btn-primary:hover { 
+    opacity: 0.9; 
+}
+
+/* منوی دکمه‌های مربعی بزرگ */
+.square-buttons-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
+.square-btn { 
+    background: rgba(255, 255, 255, 0.02); 
+    border: 2px solid var(--border-color); 
+    border-radius: 16px; 
+    padding: 35px 20px; 
+    color: #fff; 
+    cursor: pointer; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    transition: all 0.2s; 
+}
+
+.square-btn:hover { 
+    border-color: var(--primary); 
+    background: rgba(0, 242, 254, 0.04); 
+    transform: translateY(-3px); 
+}
+
+.square-icon { 
+    font-size: 40px; 
+    margin-bottom: 15px; 
+}
+
+.square-title { 
+    font-size: 18px; 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin-bottom: 8px; 
+}
+
+.square-desc { 
+    font-size: 12px; 
+    color: #7e8c9f; 
+    line-height: 1.6; 
+}
+
+/* پنل مدیریت اختصاصی ادمین */
+.admin-dashboard-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1.5fr; 
+    gap: 15px; 
+    margin-top: 15px; 
+}
+
+@media (max-width: 600px) { 
+    .admin-dashboard-grid { grid-template-columns: 1fr; } 
+}
+
+.admin-card { 
+    background: rgba(0,0,0,0.2); 
+    border: 1px solid var(--border-color); 
+    padding: 15px; 
+    border-radius: 10px; 
+}
+
+.admin-card h4 { 
+    margin-top: 0; 
+    color: #ff4757; 
+    border-bottom: 1px solid rgba(255,71,87,0.2); 
+    padding-bottom: 8px; 
+}
+
+.admin-log-box { 
+    height: 260px; 
+    overflow-y: auto; 
+    font-size: 12px; 
+    color: #bdc3c7; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.admin-user-item { 
+    background: rgba(255,255,255,0.03); 
+    padding: 6px 10px; 
+    border-radius: 4px; 
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.admin-chat-item { 
+    background: rgba(0, 242, 254, 0.03); 
+    padding: 8px; 
+    border-radius: 4px; 
+    border-right: 2px solid var(--primary); 
+}
+
+/* ناوبری و دکمه‌ها */
+.service-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 1px solid var(--border-color); 
+    padding-bottom: 15px; 
+    margin-bottom: 20px; 
+}
+
+.btn-back { 
+    background: #233554; 
+    color: #fff; 
+    border: none; 
+    padding: 6px 14px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+}
+
+.btn-logout { 
+    background: rgba(255, 71, 87, 0.1); 
+    color: var(--btn-danger); 
+    border: 1px solid var(--btn-danger); 
+    padding: 6px 14px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+}
+
+/* ساختار پیام‌رسان متنی P2P */
+.messenger-main-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1.8fr; 
+    border: 1px solid var(--border-color); 
+    border-radius: 12px; 
+    overflow: hidden; 
+}
+
+.chat-sidebar { 
+    background: rgba(0,0,0,0.15); 
+    border-left: 1px solid var(--border-color); 
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.chat-sidebar input { 
+    background: var(--panel-bg); 
+    border: 1px solid var(--border-color); 
+    padding: 10px; 
+    color: #fff; 
+    border-radius: 6px; 
+    outline: none; 
+}
+
+.chat-sidebar button { 
+    background: #233554; 
+    color: #fff; 
+    border: none; 
+    padding: 8px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+}
+
+.active-chat-target { 
+    margin-top: auto; 
+    font-size: 12px; 
+    padding: 10px; 
+    background: rgba(0, 242, 254, 0.05); 
+    border-radius: 6px; 
+    text-align: center; 
+}
+
+.chat-main-stream { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.mini-chat-stream { 
+    height: 280px; 
+    overflow-y: auto; 
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    background: rgba(10, 17, 40, 0.3); 
+}
+
+.anon-system-msg { 
+    align-self: center; 
+    color: #7e8c9f; 
+    font-size: 12px; 
+    background: rgba(255,255,255,0.03); 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    text-align: center; 
+}
+
+/* حباب‌های چت داخلی */
+.mini-msg-bubble { 
+    max-width: 80%; 
+    padding: 10px 14px; 
+    border-radius: 10px; 
+    font-size: 13px; 
+    line-height: 1.5; 
+    word-break: break-word; 
+}
+
+.mini-msg-bubble.incoming { 
+    background: #233554; 
+    color: #fff; 
+    align-self: flex-start; 
+    border-bottom-right-radius: 2px; 
+}
+
+.mini-msg-bubble.outgoing { 
+    background: var(--primary); 
+    color: #000; 
+    align-self: flex-end; 
+    border-bottom-left-radius: 2px; 
+}
+
+.mini-msg-time { 
+    display: block; 
+    font-size: 9px; 
+    opacity: 0.6; 
+    text-align: left; 
+    margin-top: 4px; 
+}
+
+.mini-chat-input-area { 
+    display: flex; 
+    background: var(--panel-bg); 
+    border-top: 1px solid var(--border-color); 
+}
+
+.mini-chat-input-area input { 
+    flex: 1; 
+    background: transparent; 
+    border: none; 
+    padding: 15px; 
+    color: #fff; 
+    outline: none; 
+}
+
+.mini-chat-input-area button { 
+    background: rgba(0, 242, 254, 0.1); 
+    color: var(--primary); 
+    border: none; 
+    padding: 0 20px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+.mini-chat-input-area button:disabled { 
+    opacity: 0.5; 
+}
+
+/* سایدبار ثابت دستیار هوشمند (سمت چپ) */
+.chat-box { 
+    height: 420px; 
+    overflow-y: auto; 
+    border: 1px solid var(--border-color); 
+    background: rgba(0,0,0,0.15); 
+    padding: 15px; 
+    border-radius: 8px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+
+.msg { 
+    max-width: 85%; 
+    padding: 10px 14px; 
+    border-radius: 8px; 
+    font-size: 14px; 
+}
+
+.bot-msg { 
+    background: #233554; 
+    color: #fff; 
+    align-self: flex-start; 
+}
+
+.user-msg { 
+    background: var(--primary); 
+    color: #000; 
+    align-self: flex-end; 
+}
+
+.chat-input-wrapper { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 10px; 
+}
+
+.chat-input-wrapper input { 
+    flex: 1; 
+    background: rgba(0,0,0,0.2); 
+    border: 1px solid var(--border-color); 
+    padding: 12px; 
+    color: #fff; 
+    border-radius: 6px; 
+    outline: none; 
+}
+
+.chat-input-wrapper button { 
+    background: var(--primary); 
+    border: none; 
+    padding: 0 20px; 
+    border-radius: 6px; 
+    color: #000; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
